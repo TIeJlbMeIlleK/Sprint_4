@@ -13,10 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MakeAnOrder {
-//    private final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-    private final FirefoxOptions options = new FirefoxOptions();
     WebDriver driver;
-
 
     @Test
     public void makeAnOrder() {
@@ -44,6 +41,7 @@ public class MakeAnOrder {
     @Before
     public void beforeStart() {
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
+        FirefoxOptions options = new FirefoxOptions();
         options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new FirefoxDriver(options);
         driver.get("https://qa-scooter.praktikum-services.ru/");
