@@ -46,6 +46,7 @@ public class HomePageLocators {
         Assert.assertTrue(driver.findElement(searchOrderField).isEnabled());
         driver.findElement(searchOrderField).clear();
         driver.findElement(searchOrderField).sendKeys(text);
+        clickOnGoButton();
     }
 
     public void clickOnGoButton(){

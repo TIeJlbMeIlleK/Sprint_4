@@ -28,7 +28,6 @@ public class CheckingDropdownList {
 
     @Parameterized.Parameters
     public static Object[][] getData() {
-        //Сгенерируй тестовые данные (свою учётку и несколько случайных)
         return new Object[][] {
                 {"Сколько это стоит? И как оплатить?", "Сутки — 400 рублей. Оплата курьеру — наличными или картой.", 0},
                 {"Хочу сразу несколько самокатов! Так можно?", "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.", 1},
@@ -43,11 +42,9 @@ public class CheckingDropdownList {
 
     @Test
     public void checkDropdownList() {
-
-
         // драйвер для браузера Chrome
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
