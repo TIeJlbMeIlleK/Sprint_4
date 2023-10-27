@@ -2,7 +2,9 @@ package pageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,6 +18,7 @@ public class HomePageLocators {
     private By searchOrderField = By.xpath(".//input[contains(@class, 'Input')]");
     private By buttonGo = By.xpath(".//button[text()='Go!']");
     private By cookieButton = By.xpath(".//button[contains(@class, 'App_CookieButton')]");
+    private By questionFields = By.xpath(".//div[contains(@class,'Home_FourPart')]/div[text()='Вопросы о важном']");
 
     public HomePageLocators(WebDriver driver) {
         this.driver = driver;
@@ -32,6 +35,20 @@ public class HomePageLocators {
     public void waitHomePage(){
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[contains(@class, 'Home_Header') and starts-with(text(), 'Самокат')]")));
+    }
+
+    public void waitForLoadQuestions(){
+        new WebDriverWait(driver, 3)
+                .until(ExpectedConditions.visibilityOfElementLocated(questionFields));
+    }
+
+    public void scrolToQuestions(){
+        WebElement element = driver.findElement((By.xpath("//div[contains(text(), 'Вопросы о важном')]")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public void selectQuestion(String text){
+        driver.findElement(By.xpath(".//div[text()='"+ text +"']")).click();
     }
 
     public void returnToHomePage(){

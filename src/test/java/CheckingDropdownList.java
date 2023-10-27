@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -6,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.HomePageLocators;
@@ -42,21 +44,21 @@ public class CheckingDropdownList {
 
     @Test
     public void checkDropdownList() {
-        // драйвер для браузера Chrome
+        HomePageLocators homePageLocators = new HomePageLocators(driver);
+        homePageLocators.waitForLoadQuestions();
+        homePageLocators.agreeWithCookie();
+        homePageLocators.scrolToQuestions();
+        homePageLocators.selectQuestion(question);
+        homePageLocators.waitForLoadQuestions();
+        assertEquals("Не верный ответ на заданный вопрос!", answer, driver.findElement(By.id("accordion__panel-" + linkPostfix)).getText());
+    }
+
+    @Before
+    public void beforeStart() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
-        HomePageLocators homePageLocators = new HomePageLocators(driver);
-
-        new WebDriverWait(driver, 3)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[text()='"+ question +"']")));
-
-        homePageLocators.agreeWithCookie();
-
-        driver.findElement(By.xpath(".//div[text()='"+ question +"']")).click();
-        assertEquals("Не верный ответ на заданный вопрос!", answer, driver.findElement(By.id("accordion__panel-" + linkPostfix)).getText());
     }
 
     @After
