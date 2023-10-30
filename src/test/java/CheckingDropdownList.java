@@ -50,7 +50,7 @@ public class CheckingDropdownList {
         homePageLocators.scrolToQuestions();
         homePageLocators.selectQuestion(question);
         homePageLocators.waitForLoadQuestions();
-        assertEquals("Не верный ответ на заданный вопрос!", answer, driver.findElement(By.id("accordion__panel-" + linkPostfix)).getText());
+        assertEquals("Не верный ответ на заданный вопрос!", answer, homePageLocators.getAnswer(linkPostfix));
     }
 
     @Before
