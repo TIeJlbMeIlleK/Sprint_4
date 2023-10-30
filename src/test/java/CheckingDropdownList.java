@@ -50,13 +50,13 @@ public class CheckingDropdownList {
         homePageLocators.scrolToQuestions();
         homePageLocators.selectQuestion(question);
         homePageLocators.waitForLoadQuestions();
-        assertEquals("Не верный ответ на заданный вопрос!", answer, driver.findElement(By.id("accordion__panel-" + linkPostfix)).getText());
+        assertEquals("Не верный ответ на заданный вопрос!", answer, homePageLocators.getAnswer(linkPostfix));
     }
 
     @Before
     public void beforeStart() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }

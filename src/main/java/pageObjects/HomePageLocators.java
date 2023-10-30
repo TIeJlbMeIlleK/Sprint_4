@@ -51,6 +51,10 @@ public class HomePageLocators {
         driver.findElement(By.xpath(".//div[text()='"+ text +"']")).click();
     }
 
+    public String getAnswer(int linkPostfix){
+        return driver.findElement(By.id("accordion__panel-" + linkPostfix)).getText();
+    }
+
     public void returnToHomePage(){
         driver.findElement(homePage).click();
         waitHomePage();
